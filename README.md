@@ -390,6 +390,15 @@ pip install -e ".[matrix-e2e]"      # Matrix E2EE; requires libolm
 pip install -e ".[math-animator]"   # Manim addon; requires LaTeX/ffmpeg/system libs
 ```
 
+Generated Math Animator videos include an **Output files** panel below the player.
+It shows the saved server path and file size, supports copying the path, and can
+reveal the original file in Finder from a local macOS browser.
+**Clean render files** previews the reclaimable size and asks for confirmation
+before removing that generation's reproducible render directory. Final outputs,
+source code, and published playback snapshots are retained. Cleanup is blocked
+while conversations are running or the reviewed files have changed. In a remote
+deployment, the displayed path belongs to the server.
+
 </details>
 
 <details>
