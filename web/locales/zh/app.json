@@ -5520,5 +5520,15 @@
   "Applies to Chat, Solve, Ask Questions, Guided Learning, Reading, Course Study and standard visualizations. Changes take effect on the next turn.": "适用于对话、解题、主动提问、引导学习、沉浸式阅读、课程学习和常规可视化。从下一轮开始生效。",
   "Clear instructions": "清空提示词",
   "{{used}} / {{limit}} characters": "{{used}} / {{limit}} 字符",
-  "contextBudget.segment.workspace_instructions": "工作区提示词"
+  "contextBudget.segment.workspace_instructions": "工作区提示词",
+  "Choose a server folder": "选择服务器文件夹",
+  "Browse folders on the server and choose a project workspace.": "逐层浏览服务器文件夹，选择要使用的项目工作区。",
+  "Select this folder": "选择此文件夹",
+  "Parent folder": "返回上一级",
+  "Current folder": "当前文件夹",
+  "Browse root": "浏览根目录",
+  "Filter folders": "筛选文件夹",
+  "Loading folders…": "正在加载文件夹…",
+  "No subfolders": "没有子文件夹",
+  "Showing the first 500 folders. Open a subfolder to narrow the list.": "仅显示前 500 个文件夹，请进入子文件夹继续查找。"
 }

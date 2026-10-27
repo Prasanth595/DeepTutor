@@ -285,6 +285,12 @@ Open [http://127.0.0.1:3782](http://127.0.0.1:3782), configure model providers i
 
 ### Content Workspace
 
+In a new conversation, open the workspace menu and **Choose a server folder**
+to browse into a project and select it without typing a path. The same picker
+is available in workspace settings. Remote deployments browse server folders;
+see the [server folder picker guide](docs-for-user/SERVER_WORKSPACE_PICKER.md)
+for Docker mounts and configurable browsing roots.
+
 The **Content Workspace** is separate from DeepTutor's private runtime home. It
 is the folder agents may read, with generated files under
 `outputs/<capability>/<session>/<turn>/`. Custom workspaces isolate conversations,

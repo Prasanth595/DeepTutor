@@ -26,6 +26,17 @@ settings_router = APIRouter()
 files_router = APIRouter()
 
 
+@settings_router.get("/folders")
+async def list_server_folders(path: str = "") -> dict:
+    """Return folders available to the authenticated workspace picker."""
+    from deeptutor.services.workspace.folders import browse_folders
+
+    try:
+        return await asyncio.to_thread(browse_folders, get_content_workspace_service(), path)
+    except WorkspaceError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
 class WorkspacePathPayload(BaseModel):
     path: str | None = None
 

@@ -5520,5 +5520,15 @@
   "Applies to Chat, Solve, Ask Questions, Guided Learning, Reading, Course Study and standard visualizations. Changes take effect on the next turn.": "Applies to Chat, Solve, Ask Questions, Guided Learning, Reading, Course Study and standard visualizations. Changes take effect on the next turn.",
   "Clear instructions": "Clear instructions",
   "{{used}} / {{limit}} characters": "{{used}} / {{limit}} characters",
-  "contextBudget.segment.workspace_instructions": "Workspace instructions"
+  "contextBudget.segment.workspace_instructions": "Workspace instructions",
+  "Choose a server folder": "Choose a server folder",
+  "Browse folders on the server and choose a project workspace.": "Browse folders on the server and choose a project workspace.",
+  "Select this folder": "Select this folder",
+  "Parent folder": "Parent folder",
+  "Current folder": "Current folder",
+  "Browse root": "Browse root",
+  "Filter folders": "Filter folders",
+  "Loading folders…": "Loading folders…",
+  "No subfolders": "No subfolders",
+  "Showing the first 500 folders. Open a subfolder to narrow the list.": "Showing the first 500 folders. Open a subfolder to narrow the list."
 }

@@ -5536,5 +5536,15 @@
   "Applies to Chat, Solve, Ask Questions, Guided Learning, Reading, Course Study and standard visualizations. Changes take effect on the next turn.": "Dotyczy czatu, rozwiązywania, pytań, nauki z przewodnikiem, czytania, kursów i standardowych wizualizacji. Zmiany obowiązują od następnej tury.",
   "Clear instructions": "Wyczyść instrukcje",
   "{{used}} / {{limit}} characters": "{{used}} / {{limit}} znaków",
-  "contextBudget.segment.workspace_instructions": "Instrukcje obszaru roboczego"
+  "contextBudget.segment.workspace_instructions": "Instrukcje obszaru roboczego",
+  "Choose a server folder": "Wybierz folder na serwerze",
+  "Browse folders on the server and choose a project workspace.": "Przeglądaj foldery na serwerze i wybierz obszar roboczy projektu.",
+  "Select this folder": "Wybierz ten folder",
+  "Parent folder": "Folder nadrzędny",
+  "Current folder": "Bieżący folder",
+  "Browse root": "Katalog główny",
+  "Filter folders": "Filtruj foldery",
+  "Loading folders…": "Wczytywanie folderów…",
+  "No subfolders": "Brak podfolderów",
+  "Showing the first 500 folders. Open a subfolder to narrow the list.": "Wyświetlono pierwszych 500 folderów. Otwórz podfolder, aby zawęzić listę."
 }

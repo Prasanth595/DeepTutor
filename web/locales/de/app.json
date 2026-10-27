@@ -5520,5 +5520,15 @@
   "Applies to Chat, Solve, Ask Questions, Guided Learning, Reading, Course Study and standard visualizations. Changes take effect on the next turn.": "Gilt für Chat, Problemlösung, Rückfragen, geführtes Lernen, Lesen, Kurslernen und Standardvisualisierungen. Änderungen gelten ab der nächsten Runde.",
   "Clear instructions": "Anweisungen leeren",
   "{{used}} / {{limit}} characters": "{{used}} / {{limit}} Zeichen",
-  "contextBudget.segment.workspace_instructions": "Arbeitsbereichsanweisungen"
+  "contextBudget.segment.workspace_instructions": "Arbeitsbereichsanweisungen",
+  "Choose a server folder": "Serverordner auswählen",
+  "Browse folders on the server and choose a project workspace.": "Durchsuche Ordner auf dem Server und wähle einen Projektarbeitsbereich.",
+  "Select this folder": "Diesen Ordner auswählen",
+  "Parent folder": "Übergeordneter Ordner",
+  "Current folder": "Aktueller Ordner",
+  "Browse root": "Stammverzeichnis",
+  "Filter folders": "Ordner filtern",
+  "Loading folders…": "Ordner werden geladen…",
+  "No subfolders": "Keine Unterordner",
+  "Showing the first 500 folders. Open a subfolder to narrow the list.": "Die ersten 500 Ordner werden angezeigt. Öffne einen Unterordner, um die Liste einzugrenzen."
 }
