@@ -1,16 +1,12 @@
-"""Sync Claude Code's model catalog by scraping its ``/model`` TUI.
+"""Sync Claude Code models through the SDK, with a legacy terminal fallback.
 
-Unlike Codex (which keeps a clean ``models_cache.json``), Claude Code exposes no
-machine-readable model list — ``/model`` lives only inside its interactive
-terminal UI. So on an explicit sync we drive ``claude`` in a pseudo-terminal,
-open ``/model``, render the screen with an in-memory terminal emulator (``pyte``)
-so the columns come out intact, parse the picker rows, and cache the result to
-``data/user/settings/claude_models_cache.json`` (mirroring Codex's cache). The
-options endpoint then reads that cache; if it's absent (never synced, or capture
-failed) the curated fallback in :mod:`models` is used.
+The optional official Agent SDK exposes a machine-readable catalog in its
+initialization response. Prefer those names and resolved model IDs, including
+families and older versions not handled by the terminal parser. Discovery
+does not submit an inference request or persist account information.
 
-The capture is best-effort and POSIX-only (needs a pty); any failure returns an
-empty list so the caller falls back to the curated catalog.
+Without a usable SDK catalog, retain the POSIX ``/model`` capture. Only a
+successful discovery replaces the cache; failed syncs leave it untouched.
 """
 
 from __future__ import annotations
@@ -21,9 +17,11 @@ import logging
 import os
 import re
 import select
+import shutil
 import signal
 import tempfile
 import time
+from typing import Any
 
 from deeptutor.services.path_service import get_path_service
 
@@ -34,6 +32,7 @@ _CACHE_FILE = "claude_models_cache.json"
 # Bounds for the capture: total wall-clock, and the terminal geometry (wide
 # enough that description columns don't wrap into the model name).
 _CAPTURE_TIMEOUT = 35.0
+_SDK_CAPTURE_TIMEOUT = 15.0
 _COLS, _ROWS = 200, 60
 
 # A picker row: optional cursor marker, an index, then "Name<2+ spaces>desc".
@@ -67,12 +66,22 @@ def load_cached_claude_models() -> tuple[list[dict[str, str]], str]:
 
 
 async def sync_claude_models() -> tuple[list[dict[str, str]], str]:
-    """Scrape ``/model`` live, cache the result, and return ``(models, fetched_at)``.
+    """Discover models, cache a successful result, and return its timestamp.
 
     Runs the blocking pty capture off the event loop. On any failure returns
     ``([], "")`` and leaves the existing cache untouched.
     """
     import asyncio
+
+    try:
+        models = await asyncio.wait_for(_discover_sdk_models(), timeout=_SDK_CAPTURE_TIMEOUT)
+    except Exception as exc:
+        logger.debug("Claude SDK model discovery unavailable (%s)", type(exc).__name__)
+        models = []
+    if models:
+        fetched_at = datetime.now(timezone.utc).isoformat()
+        _write_cache(models, fetched_at)
+        return models, fetched_at
 
     try:
         screen = await asyncio.to_thread(_capture_model_screen)
@@ -88,6 +97,49 @@ async def sync_claude_models() -> tuple[list[dict[str, str]], str]:
     fetched_at = datetime.now(timezone.utc).isoformat()
     _write_cache(models, fetched_at)
     return models, fetched_at
+
+
+def _parse_sdk_models(rows: list) -> list[dict[str, str]]:
+    models = []
+    seen: set[str] = set()
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        value = str(row.get("value") or "").strip()
+        if not value or value == "default" or row.get("disabled") or row.get("isDisabled"):
+            continue
+        if row.get("available") is False:
+            continue
+        slug = str(row.get("resolvedModel") or value).strip()
+        if value.endswith("[1m]") and not slug.endswith("[1m]"):
+            slug += "[1m]"
+        if not slug or slug in seen:
+            continue
+        seen.add(slug)
+        models.append({"slug": slug, "display_name": str(row.get("displayName") or slug)})
+    return models
+
+
+async def _discover_sdk_models() -> list[dict[str, str]]:
+    # Keep the SDK optional; CLI-only installs retain the existing fallback.
+    from claude_agent_sdk import ClaudeAgentOptions, ClaudeSDKClient
+
+    options: dict[str, Any] = {
+        "tools": [],
+        "setting_sources": [],
+        "permission_mode": "dontAsk",
+        "extra_args": {"strict-mcp-config": None},
+    }
+    cli = shutil.which("claude")
+    if cli:
+        options["cli_path"] = cli
+    # Do not discover project files, hooks, or MCP servers from the repo whose
+    # settings page initiated sync. Authentication stays CLI-managed.
+    with tempfile.TemporaryDirectory(prefix="dt-claude-model-sdk-") as directory:
+        options["cwd"] = directory
+        async with ClaudeSDKClient(options=ClaudeAgentOptions(**options)) as client:
+            info = await client.get_server_info() or {}
+            return _parse_sdk_models(info.get("models") or [])
 
 
 def _write_cache(models: list[dict[str, str]], fetched_at: str) -> None:
@@ -127,7 +179,7 @@ def _parse_model_screen(text: str) -> list[dict[str, str]]:
         if "recommended" in low or low.startswith("default"):
             continue  # the CLI default — already the UI's empty option
         base = re.sub(r"\(.*?\)", "", name).strip().split(" ")[0].lower()
-        if base not in {"opus", "sonnet", "haiku"}:
+        if base not in {"opus", "sonnet", "haiku", "fable"}:
             continue
         slug = f"{base}[1m]" if "1m context" in low else base
         if slug in seen:
