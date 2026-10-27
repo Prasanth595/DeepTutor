@@ -1213,6 +1213,31 @@ export interface paths {
     readonly patch: operations["update_event_api_calendar_events__id__patch"];
     readonly trace?: never;
   };
+  readonly "/api/calendar/export.ics": {
+    readonly parameters: {
+      readonly query?: never;
+      readonly header?: never;
+      readonly path?: never;
+      readonly cookie?: never;
+    };
+    /**
+     * Export Ics
+     * @description Download stored events as an iCalendar attachment.
+     *
+     *     Args:
+     *         calendar_id: Limit the file to one calendar. Omit to include every
+     *             visible calendar. Unknown ids return 404. Workspace overlay
+     *             layers are not included.
+     */
+    readonly get: operations["export_ics_api_calendar_export_ics_get"];
+    readonly put?: never;
+    readonly post?: never;
+    readonly delete?: never;
+    readonly options?: never;
+    readonly head?: never;
+    readonly patch?: never;
+    readonly trace?: never;
+  };
   readonly "/api/calendar/layers": {
     readonly parameters: {
       readonly query?: never;
@@ -21426,6 +21451,41 @@ export interface operations {
         };
         content: {
           readonly "application/json": components["schemas"]["CalendarRevision"];
+        };
+      };
+      /** @description Validation Error */
+      readonly 422: {
+        headers: {
+          readonly [name: string]: unknown;
+        };
+        content: {
+          readonly "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
+  readonly export_ics_api_calendar_export_ics_get: {
+    readonly parameters: {
+      readonly query?: {
+        readonly calendar_id?: string | null;
+      };
+      readonly header?: {
+        readonly Authorization?: string | null;
+      };
+      readonly path?: never;
+      readonly cookie?: {
+        readonly dt_token?: string | null;
+      };
+    };
+    readonly requestBody?: never;
+    readonly responses: {
+      /** @description Successful Response */
+      readonly 200: {
+        headers: {
+          readonly [name: string]: unknown;
+        };
+        content: {
+          readonly "text/calendar": string;
         };
       };
       /** @description Validation Error */

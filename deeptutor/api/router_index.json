@@ -1,5 +1,5 @@
 {
-  "fingerprint": "83363f052eafc8a39b8d91e575ee819a8aa01b7b86d06a19167c718f5abcf757",
+  "fingerprint": "553b7ccd8070c649ca44126cc942f7600f0df6e5c054e902b0d84e5136f59b99",
   "routers": {
     "deeptutor.api.routers.auth:router": [
       {
@@ -1923,6 +1923,14 @@
       }
     ],
     "deeptutor.api.routers.calendar:router": [
+      {
+        "path": "/export.ics",
+        "name": "export_ics",
+        "kind": "http",
+        "methods": [
+          "GET"
+        ]
+      },
       {
         "path": "/calendars",
         "name": "calendars",

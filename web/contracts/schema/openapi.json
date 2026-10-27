@@ -20520,6 +20520,88 @@
         ]
       }
     },
+    "/api/calendar/export.ics": {
+      "get": {
+        "description": "Download stored events as an iCalendar attachment.\n\nArgs:\n    calendar_id: Limit the file to one calendar. Omit to include every\n        visible calendar. Unknown ids return 404. Workspace overlay\n        layers are not included.",
+        "operationId": "export_ics_api_calendar_export_ics_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "calendar_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Calendar Id"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "in": "cookie",
+            "name": "dt_token",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Dt Token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "text/calendar": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Export Ics",
+        "tags": [
+          "calendar"
+        ]
+      }
+    },
     "/api/calendar/layers": {
       "get": {
         "operationId": "layers_api_calendar_layers_get",
