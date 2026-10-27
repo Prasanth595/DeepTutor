@@ -560,6 +560,8 @@
   "chars": "chars",
   "Export Markdown": "Export Markdown",
   "Export Word": "Export Word",
+  "Export flashcards (Anki)": "Export flashcards (Anki)",
+  "Export all for Anki": "Export all for Anki",
   "Import Word": "Import Word",
   "Failed to export Word document.": "Failed to export Word document.",
   "Load Example Template": "Load Example Template",

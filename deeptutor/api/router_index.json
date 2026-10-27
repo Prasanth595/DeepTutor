@@ -1,5 +1,5 @@
 {
-  "fingerprint": "83363f052eafc8a39b8d91e575ee819a8aa01b7b86d06a19167c718f5abcf757",
+  "fingerprint": "cecfd887d2e3e9797d040f2976d6dfb7f81044bdb94d7230394d7ab25bf26249",
   "routers": {
     "deeptutor.api.routers.auth:router": [
       {
@@ -1622,6 +1622,14 @@
         ]
       },
       {
+        "path": "/documents/flashcards/export",
+        "name": "export_all_flashcards",
+        "kind": "http",
+        "methods": [
+          "GET"
+        ]
+      },
+      {
         "path": "/documents/{doc_id}",
         "name": "get_document",
         "kind": "http",
@@ -1696,6 +1704,14 @@
       {
         "path": "/documents/review/due",
         "name": "due_note_cards",
+        "kind": "http",
+        "methods": [
+          "GET"
+        ]
+      },
+      {
+        "path": "/documents/{doc_id}/flashcards/export",
+        "name": "export_document_flashcards",
         "kind": "http",
         "methods": [
           "GET"

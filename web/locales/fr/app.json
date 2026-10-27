@@ -864,6 +864,8 @@
   "words": "mots",
   "chars": "caractères",
   "Export Markdown": "Exporter en Markdown",
+  "Export flashcards (Anki)": "Exporter les cartes mémoire (Anki)",
+  "Export all for Anki": "Tout exporter vers Anki",
   "Load Example Template": "Charger le modèle d'exemple",
   "Pro Vide Writing": "Pro Vide Writing",
   "Full Draft": "Brouillon complet",

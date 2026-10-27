@@ -560,6 +560,8 @@
   "chars": "Zeichen",
   "Export Markdown": "Markdown exportieren",
   "Export Word": "Word exportieren",
+  "Export flashcards (Anki)": "Karteikarten exportieren (Anki)",
+  "Export all for Anki": "Alle für Anki exportieren",
   "Import Word": "Word importieren",
   "Failed to export Word document.": "Word-Dokument konnte nicht exportiert werden.",
   "Load Example Template": "Beispielvorlage laden",

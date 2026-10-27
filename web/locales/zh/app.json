@@ -590,6 +590,8 @@
   "chars": "字符",
   "Export Markdown": "导出 Markdown",
   "Export Word": "导出 Word",
+  "Export flashcards (Anki)": "导出闪卡（Anki）",
+  "Export all for Anki": "全部导出到 Anki",
   "Import Word": "导入 Word",
   "Failed to export Word document.": "导出 Word 文档失败。",
   "Load Example Template": "加载示例模板",

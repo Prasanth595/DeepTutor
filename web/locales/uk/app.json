@@ -544,6 +544,8 @@
   "chars": "символів",
   "Export Markdown": "Експортувати Markdown",
   "Export Word": "Експортувати Word",
+  "Export flashcards (Anki)": "Експортувати картки (Anki)",
+  "Export all for Anki": "Експортувати все до Anki",
   "Import Word": "Імпортувати Word",
   "Failed to export Word document.": "Не вдалося експортувати документ Word.",
   "Load Example Template": "Завантажити приклад шаблону",
