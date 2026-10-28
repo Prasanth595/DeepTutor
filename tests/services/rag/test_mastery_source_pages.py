@@ -982,9 +982,7 @@ def test_focus_preparation_does_not_invalidate_objective_assessment_packet(mater
     lessons.validate_evidence(material.store, progress, "kp", snapshot)
 
 
-def test_mastery_assess_succeeds_after_focus_replaces_the_teaching_packet(
-    material, monkeypatch
-):
+def test_mastery_assess_succeeds_after_focus_replaces_the_teaching_packet(material, monkeypatch):
     """The exact #2070 loop: an objective-scoped packet survives a focus prep,
     so ``mastery_assess`` (``assess_qualitative_semantic``) still grades it."""
     from deeptutor.learning import semantic_assessment as semantic
