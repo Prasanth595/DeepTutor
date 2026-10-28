@@ -4589,6 +4589,23 @@ export interface paths {
     readonly patch?: never;
     readonly trace?: never;
   };
+  readonly "/api/modules": {
+    readonly parameters: {
+      readonly query?: never;
+      readonly header?: never;
+      readonly path?: never;
+      readonly cookie?: never;
+    };
+    /** List Modules */
+    readonly get: operations["list_modules_api_modules_get"];
+    readonly put?: never;
+    readonly post?: never;
+    readonly delete?: never;
+    readonly options?: never;
+    readonly head?: never;
+    readonly patch?: never;
+    readonly trace?: never;
+  };
   readonly "/api/multi-user/admin/books": {
     readonly parameters: {
       readonly query?: never;
@@ -6646,6 +6663,23 @@ export interface paths {
     readonly patch?: never;
     readonly trace?: never;
   };
+  readonly "/api/question-notebook/practice/export/qti": {
+    readonly parameters: {
+      readonly query?: never;
+      readonly header?: never;
+      readonly path?: never;
+      readonly cookie?: never;
+    };
+    readonly get?: never;
+    readonly put?: never;
+    /** Qti Export */
+    readonly post: operations["qti_export_api_question_notebook_practice_export_qti_post"];
+    readonly delete?: never;
+    readonly options?: never;
+    readonly head?: never;
+    readonly patch?: never;
+    readonly trace?: never;
+  };
   readonly "/api/question-notebook/practice/import/commit": {
     readonly parameters: {
       readonly query?: never;
@@ -6674,6 +6708,74 @@ export interface paths {
     readonly put?: never;
     /** Import Preview */
     readonly post: operations["import_preview_api_question_notebook_practice_import_preview_post"];
+    readonly delete?: never;
+    readonly options?: never;
+    readonly head?: never;
+    readonly patch?: never;
+    readonly trace?: never;
+  };
+  readonly "/api/question-notebook/practice/import/qti/commit": {
+    readonly parameters: {
+      readonly query?: never;
+      readonly header?: never;
+      readonly path?: never;
+      readonly cookie?: never;
+    };
+    readonly get?: never;
+    readonly put?: never;
+    /** Qti Import Commit */
+    readonly post: operations["qti_import_commit_api_question_notebook_practice_import_qti_commit_post"];
+    readonly delete?: never;
+    readonly options?: never;
+    readonly head?: never;
+    readonly patch?: never;
+    readonly trace?: never;
+  };
+  readonly "/api/question-notebook/practice/import/qti/preview": {
+    readonly parameters: {
+      readonly query?: never;
+      readonly header?: never;
+      readonly path?: never;
+      readonly cookie?: never;
+    };
+    readonly get?: never;
+    readonly put?: never;
+    /** Qti Import Preview */
+    readonly post: operations["qti_import_preview_api_question_notebook_practice_import_qti_preview_post"];
+    readonly delete?: never;
+    readonly options?: never;
+    readonly head?: never;
+    readonly patch?: never;
+    readonly trace?: never;
+  };
+  readonly "/api/question-notebook/practice/import/qti/previews/{token}": {
+    readonly parameters: {
+      readonly query?: never;
+      readonly header?: never;
+      readonly path?: never;
+      readonly cookie?: never;
+    };
+    /** Qti Preview Report */
+    readonly get: operations["qti_preview_report_api_question_notebook_practice_import_qti_previews__token__get"];
+    readonly put?: never;
+    readonly post?: never;
+    readonly delete?: never;
+    readonly options?: never;
+    readonly head?: never;
+    readonly patch?: never;
+    readonly trace?: never;
+  };
+  readonly "/api/question-notebook/practice/import/qti/previews/{token}/source": {
+    readonly parameters: {
+      readonly query?: never;
+      readonly header?: never;
+      readonly path?: never;
+      readonly cookie?: never;
+    };
+    /** Qti Preview Source */
+    readonly get: operations["qti_preview_source_api_question_notebook_practice_import_qti_previews__token__source_get"];
+    readonly put?: never;
+    readonly post?: never;
     readonly delete?: never;
     readonly options?: never;
     readonly head?: never;
@@ -11867,6 +11969,17 @@ export interface components {
       /** File */
       readonly file: string;
     };
+    /** Body_qti_import_preview_api_question_notebook_practice_import_qti_preview_post */
+    readonly Body_qti_import_preview_api_question_notebook_practice_import_qti_preview_post: {
+      /** File */
+      readonly file: string;
+      /**
+       * Target
+       * @default bank
+       * @enum {string}
+       */
+      readonly target: "bank" | "mistakes";
+    };
     /** Body_reindex_knowledge_base_api_knowledge_bases__kb_name__reindex_post */
     readonly Body_reindex_knowledge_base_api_knowledge_bases__kb_name__reindex_post: {
       /**
@@ -15007,6 +15120,10 @@ export interface components {
        * @default
        */
       readonly explanation: string;
+      /** Fill Spec */
+      readonly fill_spec?: {
+        readonly [key: string]: unknown;
+      } | null;
       /**
        * Followup Session Id
        * @default
@@ -15071,6 +15188,10 @@ export interface components {
       readonly quality?: number | null;
       /** Question */
       readonly question: string;
+      /** Question Content */
+      readonly question_content?: {
+        readonly [key: string]: unknown;
+      } | null;
       /**
        * Question Id
        * @default
@@ -15638,6 +15759,30 @@ export interface components {
         | "stt"
         | "imagegen"
         | "videogen";
+    };
+    /** QtiCommitRequest */
+    readonly QtiCommitRequest: {
+      /** Selected */
+      readonly selected: readonly string[];
+      /** Token */
+      readonly token: string;
+    };
+    /** QtiExportRequest */
+    readonly QtiExportRequest: {
+      /** Entry Ids */
+      readonly entry_ids: readonly number[];
+      /**
+       * Format
+       * @default zip
+       * @enum {string}
+       */
+      readonly format: "xml" | "zip";
+      /**
+       * Version
+       * @default 3.0
+       * @constant
+       */
+      readonly version: "3.0";
     };
     /** QuestionBankMaterial */
     readonly QuestionBankMaterial: {
@@ -17588,6 +17733,10 @@ export interface components {
        * @default
        */
       readonly explanation: string;
+      /** Fill Spec */
+      readonly fill_spec?: {
+        readonly [key: string]: unknown;
+      } | null;
       /**
        * Hints Used
        * @default 0
@@ -17638,6 +17787,10 @@ export interface components {
       readonly quality?: number | null;
       /** Question */
       readonly question: string;
+      /** Question Content */
+      readonly question_content?: {
+        readonly [key: string]: unknown;
+      } | null;
       /** Question Id */
       readonly question_id: string;
       /**
@@ -18136,6 +18289,8 @@ export type SchemaBodyImportVisualizerApiVisualizersImportPost =
 export type SchemaBodyLibraryAdd = components["schemas"]["Body_library_add"];
 export type SchemaBodyPreviewOfficeUploadApiFilePreviewPdfPost =
   components["schemas"]["Body_preview_office_upload_api_file_preview_pdf_post"];
+export type SchemaBodyQtiImportPreviewApiQuestionNotebookPracticeImportQtiPreviewPost =
+  components["schemas"]["Body_qti_import_preview_api_question_notebook_practice_import_qti_preview_post"];
 export type SchemaBodyReindexKnowledgeBaseApiKnowledgeBasesKbNameReindexPost =
   components["schemas"]["Body_reindex_knowledge_base_api_knowledge_bases__kb_name__reindex_post"];
 export type SchemaBodySpeechToTextApiVoiceSttPost =
@@ -18494,6 +18649,8 @@ export type SchemaProviderModeUpdate =
   components["schemas"]["ProviderModeUpdate"];
 export type SchemaProviderProbePayload =
   components["schemas"]["ProviderProbePayload"];
+export type SchemaQtiCommitRequest = components["schemas"]["QtiCommitRequest"];
+export type SchemaQtiExportRequest = components["schemas"]["QtiExportRequest"];
 export type SchemaQuestionBankMaterial =
   components["schemas"]["QuestionBankMaterial"];
 export type SchemaQuestionBankStats =
@@ -28403,6 +28560,39 @@ export interface operations {
       };
     };
   };
+  readonly list_modules_api_modules_get: {
+    readonly parameters: {
+      readonly query?: never;
+      readonly header?: {
+        readonly Authorization?: string | null;
+      };
+      readonly path?: never;
+      readonly cookie?: {
+        readonly dt_token?: string | null;
+      };
+    };
+    readonly requestBody?: never;
+    readonly responses: {
+      /** @description Successful Response */
+      readonly 200: {
+        headers: {
+          readonly [name: string]: unknown;
+        };
+        content: {
+          readonly "application/json": unknown;
+        };
+      };
+      /** @description Validation Error */
+      readonly 422: {
+        headers: {
+          readonly [name: string]: unknown;
+        };
+        content: {
+          readonly "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
   readonly admin_books_api_multi_user_admin_books_get: {
     readonly parameters: {
       readonly query?: never;
@@ -33438,6 +33628,43 @@ export interface operations {
       };
     };
   };
+  readonly qti_export_api_question_notebook_practice_export_qti_post: {
+    readonly parameters: {
+      readonly query?: never;
+      readonly header?: {
+        readonly Authorization?: string | null;
+      };
+      readonly path?: never;
+      readonly cookie?: {
+        readonly dt_token?: string | null;
+      };
+    };
+    readonly requestBody: {
+      readonly content: {
+        readonly "application/json": components["schemas"]["QtiExportRequest"];
+      };
+    };
+    readonly responses: {
+      /** @description Successful Response */
+      readonly 200: {
+        headers: {
+          readonly [name: string]: unknown;
+        };
+        content: {
+          readonly "application/json": unknown;
+        };
+      };
+      /** @description Validation Error */
+      readonly 422: {
+        headers: {
+          readonly [name: string]: unknown;
+        };
+        content: {
+          readonly "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
   readonly import_commit_api_question_notebook_practice_import_commit_post: {
     readonly parameters: {
       readonly query?: never;
@@ -33512,10 +33739,154 @@ export interface operations {
       };
     };
   };
+  readonly qti_import_commit_api_question_notebook_practice_import_qti_commit_post: {
+    readonly parameters: {
+      readonly query?: never;
+      readonly header?: {
+        readonly Authorization?: string | null;
+      };
+      readonly path?: never;
+      readonly cookie?: {
+        readonly dt_token?: string | null;
+      };
+    };
+    readonly requestBody: {
+      readonly content: {
+        readonly "application/json": components["schemas"]["QtiCommitRequest"];
+      };
+    };
+    readonly responses: {
+      /** @description Successful Response */
+      readonly 200: {
+        headers: {
+          readonly [name: string]: unknown;
+        };
+        content: {
+          readonly "application/json": unknown;
+        };
+      };
+      /** @description Validation Error */
+      readonly 422: {
+        headers: {
+          readonly [name: string]: unknown;
+        };
+        content: {
+          readonly "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
+  readonly qti_import_preview_api_question_notebook_practice_import_qti_preview_post: {
+    readonly parameters: {
+      readonly query?: never;
+      readonly header?: {
+        readonly Authorization?: string | null;
+      };
+      readonly path?: never;
+      readonly cookie?: {
+        readonly dt_token?: string | null;
+      };
+    };
+    readonly requestBody: {
+      readonly content: {
+        readonly "multipart/form-data": components["schemas"]["Body_qti_import_preview_api_question_notebook_practice_import_qti_preview_post"];
+      };
+    };
+    readonly responses: {
+      /** @description Successful Response */
+      readonly 200: {
+        headers: {
+          readonly [name: string]: unknown;
+        };
+        content: {
+          readonly "application/json": unknown;
+        };
+      };
+      /** @description Validation Error */
+      readonly 422: {
+        headers: {
+          readonly [name: string]: unknown;
+        };
+        content: {
+          readonly "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
+  readonly qti_preview_report_api_question_notebook_practice_import_qti_previews__token__get: {
+    readonly parameters: {
+      readonly query?: never;
+      readonly header?: {
+        readonly Authorization?: string | null;
+      };
+      readonly path: {
+        readonly token: string;
+      };
+      readonly cookie?: {
+        readonly dt_token?: string | null;
+      };
+    };
+    readonly requestBody?: never;
+    readonly responses: {
+      /** @description Successful Response */
+      readonly 200: {
+        headers: {
+          readonly [name: string]: unknown;
+        };
+        content: {
+          readonly "application/json": unknown;
+        };
+      };
+      /** @description Validation Error */
+      readonly 422: {
+        headers: {
+          readonly [name: string]: unknown;
+        };
+        content: {
+          readonly "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
+  readonly qti_preview_source_api_question_notebook_practice_import_qti_previews__token__source_get: {
+    readonly parameters: {
+      readonly query?: never;
+      readonly header?: {
+        readonly Authorization?: string | null;
+      };
+      readonly path: {
+        readonly token: string;
+      };
+      readonly cookie?: {
+        readonly dt_token?: string | null;
+      };
+    };
+    readonly requestBody?: never;
+    readonly responses: {
+      /** @description Successful Response */
+      readonly 200: {
+        headers: {
+          readonly [name: string]: unknown;
+        };
+        content: {
+          readonly "application/json": unknown;
+        };
+      };
+      /** @description Validation Error */
+      readonly 422: {
+        headers: {
+          readonly [name: string]: unknown;
+        };
+        content: {
+          readonly "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
   readonly import_template_api_question_notebook_practice_import_template_get: {
     readonly parameters: {
       readonly query?: {
-        readonly format?: "csv" | "xlsx";
+        readonly format?: "csv" | "xlsx" | "json" | "json-schema";
       };
       readonly header?: {
         readonly Authorization?: string | null;
