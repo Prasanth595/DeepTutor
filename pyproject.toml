@@ -52,6 +52,7 @@ deeptutor = "deeptutor_cli.main:main"
 # Optional modules own their code and dependencies. Full is an installation profile.
 cli = []
 codebuddy = ["codebuddy-agent-sdk>=0.3,<0.4"]
+claude-code = ["claude-agent-sdk>=0.2,<0.3"]
 video-learning = ["deeptutor-reading==1.6.15"]
 edge-tts = ["edge-tts>=7.0,<8.0"]
 video-lesson = ["deeptutor-video-lesson==1.6.15", "edge-tts>=7.0,<8.0"]

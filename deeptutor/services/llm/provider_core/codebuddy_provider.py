@@ -529,13 +529,14 @@ async def _consume_messages(
     *,
     on_content_delta: Callable[[str], Awaitable[None]] | None,
     interrupt: Callable[[], Awaitable[None]] | None = None,
+    label: str = "CodeBuddy",
 ) -> LLMResponse:
     chunks: list[str] = []
     pending_result_text = ""
     async for message in messages:
         if _is_error_result(message):
             return LLMResponse(
-                content=f"Error calling CodeBuddy: {_result_text(message)}",
+                content=f"Error calling {label}: {_result_text(message)}",
                 finish_reason="error",
             )
         if _is_result_message(message):
@@ -554,8 +555,9 @@ async def _consume_messages(
                     await interrupt()
                 except Exception as exc:
                     logger.warning(
-                        "CodeBuddy interrupt after tool calls failed (%s); "
+                        "%s interrupt after tool calls failed (%s); "
                         "background generation may keep running",
+                        label,
                         type(exc).__name__,
                     )
                 else:
